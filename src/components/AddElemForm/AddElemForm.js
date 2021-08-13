@@ -1,11 +1,11 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import {Formik, Form, Field, ErrorMessage} from 'formik';
 import styles from "./AddElemFormStyles.module.sass"
 
 function AddElemForm(props) {
     return (
         <Formik
-            initialValues={{ note: '' }}
+            initialValues={{note: ''}}
             validate={values => {
                 const errors = {};
                 if (!values.note) {
@@ -13,23 +13,27 @@ function AddElemForm(props) {
                 }
                 return errors;
             }}
-            onSubmit={(values, { setSubmitting }) => {
-                props.setListItems(
-                    [
-                        ...props.listItems,
-                        values.note
-                    ]
-                );
+            onSubmit={(values, {setSubmitting}) => {
+
+                    props.setListItems(
+                        [
+                            ...props.listItems,
+                            {
+                                value: values.note,
+                            }
+                        ]
+                    );
+
                 values.note = '';
                 setSubmitting(false);
             }}
         >
-            {({ isSubmitting }) => (
+            {({isSubmitting}) => (
                 <Form className={styles.formContainer}>
-                    <Field className={styles.fieldContainer} type="text" name="note" placeholder="Текст заметки"/>
-                    <ErrorMessage className={styles.errorMessage} name="note" component="div" />
+                    <Field className={styles.fieldContainer} type="text" name="note" placeholder="Note"/>
+                    <ErrorMessage className={styles.errorMessage} name="note" component="div"/>
                     <button type="submit" disabled={isSubmitting}>
-                        Добавить
+                        Add
                     </button>
                 </Form>
             )}

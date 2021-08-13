@@ -11,7 +11,7 @@ function ListContainer(props) {
         <ul className={styles.listContainer}>
             {
                 listItems.map((item, index)=> (
-                    <ListElem key={index} value={item}/>
+                    <ListElem key={index} item={item}/>
                 ))
             }
             <AddElemForm listItems={listItems} setListItems={setListItems}/>
