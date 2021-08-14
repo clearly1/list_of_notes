@@ -4,7 +4,6 @@ import styles from "./ListContainerStyles.module.sass"
 import ListElem from "../ListElem/ListElem";
 import * as _ from 'lodash';
 
-
 function ListContainer(props) {
     const [listItems, setListItems] = useState([]);
 
