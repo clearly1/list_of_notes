@@ -13,31 +13,26 @@ function ListElem(props) {
     return (
         <li className={styles.listElemContainer}>
             <div className={styles.flexContainer}>
-                {props.item.value}
+                <div className={styles.note}>{props.item.value}</div>
                 <div className={styles.buttonsContainer}>
-                    <div className={styles.buttonWrapper} >
+
                         {
                             props.index !== 0 &&
                             <button onClick={() => props.up(pathToElem, pathToPrevElem)}>up</button>
                         }
-                    </div>
-                    <div className={styles.buttonWrapper} >
                         {
                             props.index < props.currentList.length - 1 &&
                             <button onClick={() => props.down(pathToElem, pathToNextElem)}>down</button>
                         }
-                    </div>
-                    <div className={styles.buttonWrapper} >
                         {
                             props.item.subList ?
                                 <button onClick={() => props.removeSubList(pathToSubList)}>Remove Sublist</button>
                                 :
                                 <button onClick={() => props.addSubList(pathToSubList)}>Add Sublist</button>
                         }
-                    </div>
-                    <div className={styles.buttonWrapper}>
+
                         <button onClick={() => props.remove(pathToElem, pathToCurrentList)}>Remove</button>
-                    </div>
+
                 </div>
             </div>
             {

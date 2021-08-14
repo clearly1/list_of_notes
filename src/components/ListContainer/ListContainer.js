@@ -31,7 +31,6 @@ function ListContainer(props) {
         _.set(tmp, path, null);
         setListItems(tmp);
     };
-
     const remove = (pathToElem, pathToCurrentList) => {
         let tmp = [...listItems];
         if(pathToCurrentList === ''){
@@ -47,6 +46,7 @@ function ListContainer(props) {
     };
 
     return (
+
         <ul className={styles.listContainer}>
             {
                 listItems.map((item, index) => (

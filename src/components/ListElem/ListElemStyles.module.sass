@@ -12,6 +12,11 @@
 .buttonsContainer
   margin-left: auto
   display: flex
+  min-width: 270px
+  height: fit-content
+  justify-content: flex-end
+  button+button
+    margin-left: 5px
 
 .buttonsContainer:hover
   button
@@ -21,8 +26,5 @@
     background-color: #f7fffc !important
     transition: 0.3s
 
-.buttonWrapper
-  width: 110px
-  button
-    display: flex
-    margin: 0 auto
+.note
+  margin-right: 20px
