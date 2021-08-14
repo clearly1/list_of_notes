@@ -4,21 +4,45 @@ import AddElemForm from "../AddElemForm/AddElemForm";
 
 function ListElem(props) {
 
-    const [listElemValue, setListElemValue] = useState(props.item.value);
-    const [subList, setSubList] = useState([]);
+    const pathToSubList = (props.pathToSubList || '') + `[${props.index}].subList`;
+    const pathToElem = (props.pathToElem || '') + `[${props.index}]`;
+    const pathToPrevElem = (props.pathToElem || '') + `[${props.index - 1}]`;
+    const pathToNextElem = (props.pathToElem || '') + `[${props.index + 1}]`;
+    const pathToCurrentList = props.pathToElem || '';
 
     return (
         <li className={styles.listElemContainer}>
-            {listElemValue}
+            {props.item.value}
             {
-                subList &&
+                props.index !== 0 &&
+                <button onClick={() => props.up(pathToElem, pathToPrevElem)}>up</button>
+            }
+            {
+                props.index < props.currentList.length - 1 &&
+                <button onClick={() => props.down(pathToElem, pathToNextElem)}>down</button>
+            }
+            {
+                props.item.subList ?
+                    <button onClick={() => props.removeSubList(pathToSubList)}>Remove Sublist</button>
+                    :
+                    <button onClick={() => props.addSubList(pathToSubList)}>Add Sublist</button>
+            }
+            <button onClick={() => props.remove(pathToElem, pathToCurrentList)}>Remove</button>
+            {
+                props.item.subList &&
                 <ul>
                     {
-                        subList.map((item, index) => (
-                            <ListElem key={index} item={item}/>
+                        props.item.subList.map((item, index) => (
+                            <ListElem key={index} index={index} item={item} up={props.up} down={props.down}
+                                      addSubList={props.addSubList}
+                                      removeSubList={props.removeSubList} remove={props.remove}
+                                      listItems={props.listItems}
+                                      currentList={props.item.subList}
+                                      setListItems={props.setListItems} pathToSubList={pathToSubList}
+                                      pathToElem={pathToElem + '.subList'}/>
                         ))
                     }
-                    <AddElemForm listItems={subList} setListItems={setSubList}/>
+                    <AddElemForm listItems={props.listItems} setListItems={props.setListItems} pathToElem={pathToElem}/>
                 </ul>
             }
         </li>
